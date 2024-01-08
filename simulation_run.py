@@ -105,7 +105,7 @@ def create_reconstructed_image(image, noise_level, num_samples, image_size, sigm
     """
     measurements = [system_model(image, noise_level, sigma) for _ in range(num_samples)]
     psf = gaussian_psf(sigma, size=5)  # Erzeugen Sie die PSF mit der gleichen Sigma wie beim Blur
-    reconstructions = [richardson_lucy(y.reshape(image_size, image_size), psf, iterations=30) for y in measurements]
+    reconstructions = [richardson_lucy(y.reshape(image_size, image_size), psf, iterations=1200) for y in measurements]
     return np.mean(reconstructions, axis=0)
 
 
@@ -113,7 +113,7 @@ if __name__ == "__main__":
     image_size = get_image_size_from_user()
     noise_level = 0.0001
     perturbation = 0.01
-    num_samples = 100
+    num_samples = 30
     sigma = 1
 
     original_image = np.zeros((image_size, image_size))
