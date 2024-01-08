@@ -105,7 +105,7 @@ def create_reconstructed_image(image, noise_level, num_samples, image_size, sigm
     Generates the average reconstructed image based on Monte Carlo simulations.
     """
     measurements = [system_model(image, noise_level, sigma) for _ in range(num_samples)]
-    psf = gaussian_psf(sigma, size=5)  # Erzeugen Sie die PSF mit der gleichen Sigma wie beim Blur
+    psf = gaussian_psf(sigma, size=5)
     reconstructions = [richardson_lucy(y.reshape(image_size, image_size), psf, iterations=1200) for y in measurements]
     return np.mean(reconstructions, axis=0)
 
@@ -118,7 +118,6 @@ if __name__ == "__main__":
     sigma = 1
 
     original_image = np.zeros((image_size, image_size))
-    #original_image = draw_smiley(image_size)
     original_image[image_size // 2, image_size // 2] = 1
 
     noisy_image = create_noisy_image(original_image, noise_level, sigma)
