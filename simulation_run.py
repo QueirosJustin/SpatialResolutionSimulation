@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+#Python 3.12.0 64 bit version
 
 import numpy as np
 import matplotlib.pyplot as plt
